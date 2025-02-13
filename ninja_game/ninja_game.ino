@@ -309,16 +309,6 @@ void handleCollisions() {
   }
 }
 
-bool checkCollision(GameObject& a, GameObject& b) {
-  const int marginPlayer = 2;
-  const int marginObstacle = 2;
-
-  return (a.x + marginPlayer < b.x + b.width - marginObstacle &&
-          a.x + a.width - marginPlayer > b.x + marginObstacle &&
-          a.y + marginPlayer < b.y + b.height - marginObstacle &&
-          a.y + a.height - marginPlayer > b.y + marginObstacle);
-}
-
 void drawGame() {
   display.clearDisplay();
   
