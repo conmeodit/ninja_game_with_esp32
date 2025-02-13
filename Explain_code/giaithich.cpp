@@ -21,6 +21,7 @@ const float GROUND_Y = SCREEN_HEIGHT - 16; // Vị trí mặt đất
 
 // Mảng bitmap cho các sprite của nhân vật ninja khi chạy frame 1
 // Mỗi byte đại diện cho 8 pixel, 1 là pixel sáng, 0 là pixel tối
+// bên dưới là hình ảnh dạng hex, muốn vẽ thì vẽ pixel rồi chuyển qua hệ nhị phân rồi từ hệ nhị phân chuyển qua dạng hex
 const unsigned char PROGMEM ninja_run1[] = {
     0x06, 0xFC, 0xB5, 0x92, 0x59, 0x8A, 0x02, 0x92,
     0x62, 0x82, 0xBC, 0x7C, 0x00, 0x10, 0x31, 0xF0,
@@ -454,7 +455,7 @@ void drawGame()
     else
     {
         display.drawBitmap(player.x, player.y,
-                           player.frame ? ninja_run1 : ninja_run2, 16, 16, WHITE);
+                           player.frame ? ninja_run1 : ninja_run2, 16, 16, WHITE); // luân phiên 2 hoạt ảnh với nhau
     }
 
     // Vẽ các chướng ngại vật
@@ -549,8 +550,8 @@ void resetObstacle(int index)
     // Cập nhật các thông số khác
     obstacles[index].type = type;
     obstacles[index].active = true;
-    obstacles[index].velocity_x = -3;
-    obstacles[index].frame = 0;
+    obstacles[index].velocity_x = -3; // chuyển động sang trái với vận tốc 3 đơn vị mỗi bước
+    obstacles[index].frame = 0;       // đặt hoạt ảnh về khung hình đầu tiên
 }
 
 // Hàm xử lý kết thúc game
