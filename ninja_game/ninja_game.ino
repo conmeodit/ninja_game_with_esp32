@@ -110,11 +110,6 @@ bool isNight = false;
 unsigned long dayNightTimer = 0;
 const unsigned long DAY_NIGHT_DURATION = 10000;
 
-const int BUZZER_PIN = 25;
-const int SOUND_JUMP = 1;
-const int SOUND_COLLISION = 2;
-const int SOUND_POINT = 3;
-
 bool getBitmapPixel(const unsigned char* bitmap, int bmpWidth, int bmpHeight, int x, int y) {
   if (x < 0 || x >= bmpWidth || y < 0 || y >= bmpHeight)
     return false;

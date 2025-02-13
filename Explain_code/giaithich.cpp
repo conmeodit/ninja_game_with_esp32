@@ -126,11 +126,6 @@ bool isNight = false;                           // Trạng thái ngày/đêm
 unsigned long dayNightTimer = 0;                // Bộ đếm cho chu kỳ ngày/đêm
 const unsigned long DAY_NIGHT_DURATION = 10000; // Thời gian một chu kỳ ngày/đêm (ms)
 
-// Định nghĩa cho hệ thống âm thanh
-const int BUZZER_PIN = 25;     // Pin kết nối với buzzer
-const int SOUND_JUMP = 1;      // ID âm thanh nhảy
-const int SOUND_COLLISION = 2; // ID âm thanh va chạm
-const int SOUND_POINT = 3;     // ID âm thanh lấy điểm
 // Hàm kiểm tra giá trị pixel trong bitmap
 bool getBitmapPixel(const unsigned char *bitmap, int bmpWidth, int bmpHeight, int x, int y)
 {
