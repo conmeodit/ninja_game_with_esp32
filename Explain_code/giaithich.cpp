@@ -422,19 +422,6 @@ void handleCollisions()
     }
 }
 
-// Hàm kiểm tra va chạm đơn giản bằng hình chữ nhật
-bool checkCollision(GameObject &a, GameObject &b)
-{
-    const int marginPlayer = 2; // Margin để va chạm mượt hơn
-    const int marginObstacle = 2;
-
-    // Kiểm tra va chạm dựa trên hitbox
-    return (a.x + marginPlayer < b.x + b.width - marginObstacle &&
-            a.x + a.width - marginPlayer > b.x + marginObstacle &&
-            a.y + marginPlayer < b.y + b.height - marginObstacle &&
-            a.y + a.height - marginPlayer > b.y + marginObstacle);
-}
-
 // Hàm vẽ game
 void drawGame()
 {

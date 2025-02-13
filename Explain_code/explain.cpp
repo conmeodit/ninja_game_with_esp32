@@ -411,19 +411,6 @@ void handleCollisions()
     }
 }
 
-// Hàm checkCollision: Kiểm tra va chạm dựa trên bounding box với biên trừ (không dùng trong hàm chính)
-// Hàm này sử dụng margin để tránh việc phát hiện va chạm giả do sprite có khoảng trống
-bool checkCollision(GameObject &a, GameObject &b)
-{
-    const int marginPlayer = 2;
-    const int marginObstacle = 2;
-
-    return (a.x + marginPlayer < b.x + b.width - marginObstacle &&
-            a.x + a.width - marginPlayer > b.x + marginObstacle &&
-            a.y + marginPlayer < b.y + b.height - marginObstacle &&
-            a.y + a.height - marginPlayer > b.y + marginObstacle);
-}
-
 // Hàm drawGame: Vẽ toàn bộ các thành phần của trò chơi lên màn hình OLED
 void drawGame()
 {
