@@ -1,14 +1,12 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include <EEPROM.h>
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
 #define BUTTON_JUMP 18
 #define BUTTON_DUCK 19
-#define EEPROM_HIGH_SCORE 0
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
@@ -192,15 +190,13 @@ void setup() {
   Serial.begin(115200);
   pinMode(BUTTON_JUMP, INPUT_PULLUP);
   pinMode(BUTTON_DUCK, INPUT_PULLUP);
-  pinMode(BUZZER_PIN, OUTPUT);
+
   
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println(F("SSD1306 allocation failed"));
     for(;;);
   }
   
-  EEPROM.begin(512);
-  highScore = EEPROM.read(EEPROM_HIGH_SCORE);
   
   display.clearDisplay();
   display.setTextSize(1);
@@ -411,12 +407,6 @@ void resetObstacle(int index) {
 
 void gameOver() {
   gameState = GAME_OVER;
-  
-  if (score > highScore) {
-    highScore = score;
-    EEPROM.write(EEPROM_HIGH_SCORE, highScore);
-    EEPROM.commit();
-  }
 }
 
 void showSplashScreen() {

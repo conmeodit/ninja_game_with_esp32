@@ -2,15 +2,13 @@
 #include <Wire.h>             // Thư viện giao tiếp I2C
 #include <Adafruit_GFX.h>     // Thư viện đồ họa cơ bản
 #include <Adafruit_SSD1306.h> // Thư viện điều khiển màn hình OLED
-#include <EEPROM.h>           // Thư viện để lưu trữ dữ liệu vào bộ nhớ không volatile
 
 // Định nghĩa các hằng số cho màn hình
-#define SCREEN_WIDTH 128    // Chiều rộng màn hình OLED (pixels)
-#define SCREEN_HEIGHT 64    // Chiều cao màn hình OLED (pixels)
-#define OLED_RESET -1       // Pin reset cho màn hình (-1 nếu chia sẻ với pin reset của Arduino)
-#define BUTTON_JUMP 18      // Pin cho nút nhảy
-#define BUTTON_DUCK 19      // Pin cho nút cúi xuống
-#define EEPROM_HIGH_SCORE 0 // Địa chỉ trong EEPROM để lưu điểm cao
+#define SCREEN_WIDTH 128 // Chiều rộng màn hình OLED (pixels)
+#define SCREEN_HEIGHT 64 // Chiều cao màn hình OLED (pixels)
+#define OLED_RESET -1    // Pin reset cho màn hình (-1 nếu chia sẻ với pin reset của Arduino)
+#define BUTTON_JUMP 18   // Pin cho nút nhảy
+#define BUTTON_DUCK 19   // Pin cho nút cúi xuống
 
 // Khởi tạo đối tượng màn hình OLED với các thông số đã định nghĩa
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
@@ -207,7 +205,6 @@ Sprite getPlayerSprite()
 }
 
 // Hàm lấy sprite cho chướng ngại vật
-// Tiếp tục hàm getObstacleSprite
 Sprite getObstacleSprite(GameObject &ob)
 {
     Sprite s;
@@ -246,7 +243,6 @@ void setup()
     // Thiết lập các chân GPIO
     pinMode(BUTTON_JUMP, INPUT_PULLUP); // Nút nhảy với điện trở kéo lên
     pinMode(BUTTON_DUCK, INPUT_PULLUP); // Nút cúi với điện trở kéo lên
-    pinMode(BUZZER_PIN, OUTPUT);        // Chân buzzer là output
 
     // Khởi tạo màn hình OLED
     if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
@@ -255,10 +251,6 @@ void setup()
         for (;;)
             ; // Dừng nếu không khởi tạo được màn hình
     }
-
-    // Khởi tạo EEPROM và đọc điểm cao
-    EEPROM.begin(512);
-    highScore = EEPROM.read(EEPROM_HIGH_SCORE);
 
     // Thiết lập màn hình
     display.clearDisplay();
@@ -565,14 +557,6 @@ void resetObstacle(int index)
 void gameOver()
 {
     gameState = GAME_OVER;
-
-    // Cập nhật điểm cao nếu cần
-    if (score > highScore)
-    {
-        highScore = score;
-        EEPROM.write(EEPROM_HIGH_SCORE, highScore);
-        EEPROM.commit();
-    }
 }
 
 // Hàm hiển thị màn hình chào
